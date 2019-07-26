@@ -18,7 +18,7 @@ export default function LocationsList() {
   }, []);
 
   return (
-    <section>
+    <section className="character-list grid-view">
       {locations.map(location => (
         <LocationCard location={location} />
       ))}
