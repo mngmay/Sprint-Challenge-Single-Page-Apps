@@ -1,5 +1,5 @@
 import React from "react";
-import { Tab, Menu, Icon, tv } from "semantic-ui-react";
+import { Tab, Menu, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
 // TODO: Add missing tabs below
@@ -15,7 +15,7 @@ const createLabel = (iconName, labelText) => (
 
 const welcomeLabel = createLabel("home", "Home Page");
 const characterLabel = createLabel("users", "Characters");
-const locationLabel = createLabel("locations", "Locations");
+const locationLabel = createLabel("map outline", "Locations");
 const episodeLabel = createLabel("tv", "Episodes");
 
 const panes = [
