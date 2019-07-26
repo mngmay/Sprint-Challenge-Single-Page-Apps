@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 export default function SearchForm({ onSearch }) {
   const [query, setQuery] = useState({
     name: ""
   });
+
   const handleInputChange = event => {
     setQuery({ ...query, name: event.target.value });
   };
