@@ -1,16 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import CharacterCard from "./CharacterCard";
+import SearchForm from "./SearchForm";
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
+  const [characters, setCharacters] = useState([]);
+  const [name, setName] = useState(null);
+  console.log(name);
+
+  function onSearch(e, query) {
+    e.preventDefault();
+    setName(query.name);
+  }
 
   useEffect(() => {
-    // TODO: Add AJAX/API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  }, [])
+    if (name) {
+      axios
+        .get(`https://rickandmortyapi.com/api/character/?name=${name}`)
+        .then(response => {
+          console.log(response.data.results);
+          setCharacters(response.data.results);
+        })
+        .catch(err => {
+          console.log("Error", err);
+        });
+    } else {
+      axios
+        .get(`https://rickandmortyapi.com/api/character`)
+        .then(response => {
+          // console.log(response.data.results);
+          setCharacters(response.data.results);
+        })
+        .catch(err => {
+          console.log("Error", err);
+        });
+    }
+  }, [name]);
 
-  return <section className='character-list grid-view'>
-
-      <h2>TODO: `array.map()` over your state here!</h2>
-    </section>
-
+  return (
+    <div>
+      <SearchForm onSearch={onSearch} />
+      <section className="character-list grid-view">
+        {characters.map(char => (
+          <CharacterCard character={char} key={char.id} />
+        ))}
+      </section>
+    </div>
+  );
 }
